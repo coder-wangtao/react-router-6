@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <ul>
+      <li><a onclick="pushA()">/a</a></li>
+      <li><a onclick="pushB()">/b</a></li>
+      <li><a onclick="pushC()">/c</a></li>
+      <li><a onclick="forward()">forward</a></li>
+      <li><a onclick="back()">back</a></li>
+      <li><a onclick="go(1)">go(1)</a></li>
+      <li><a onclick="go(-1)">go(-1)</a></li>
+    </ul>
+    <script>
+      (function (history) {
+        let oldPushState = history.pushState;
+        history.pushState = function () {
+          let result = oldPushState.apply(history, arguments);
+          if (typeof window.onpopstate === "function") {
+            //自己手动触发window.onpopstate
+            window.onpopstate(new CustomEvent("pushstate"));
+          }
+          return result;
+        };
+      })(history);
+
+      window.onpopstate = (event) => {
+        root.innerHTML = window.location.pathname;
+      };
+      function pushA() {
+        history.pushState({ name: "a" }, null, "/a");
+      }
+      function pushB() {
+        history.pushState({ name: "b" }, null, "/b");
+      }
+      function pushC() {
+        history.pushState({ name: "c" }, null, "/c");
+      }
+      function go(n) {
+        history.go(n);
+      }
+      function forward() {
+        history.forward();
+      }
+      function back() {
+        history.back();
+      }
+    </script>
+  </body>
+</html>
