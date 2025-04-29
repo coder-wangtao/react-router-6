@@ -1,7 +1,6 @@
 import React, { createContext } from "react";
 const NavigatorContext = createContext();
 const LocationContext = createContext();
-const RouteContext = createContext();
 
 export function Route(props) {}
 
@@ -26,7 +25,6 @@ export function Router({ children, location, navigator }) {
 
 export function Routes({ children }) {
   const a = useRoutes(createRoutesFromChildren(children));
-  debugger;
   return a;
 }
 
@@ -38,7 +36,6 @@ function useLocation() {
  * 用routes和当前浏览器地址进行匹配
  */
 function useRoutes(routes) {
-  debugger;
   let location = useLocation();
   let pathname = location.pathname;
   for (let i = 0; i < routes.length; i++) {
