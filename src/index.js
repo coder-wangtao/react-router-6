@@ -64,7 +64,6 @@ function Layout(props) {
       <CustomLink to="/user">用户中心</CustomLink>
       <CustomLink to="/login">登录</CustomLink>
       <CustomLink to="/about">关于</CustomLink>
-
       <Outlet />
     </div>
   );
@@ -73,6 +72,7 @@ function Layout(props) {
 export function CustomLink({ to, ...rest }) {
   const resolved = useResolvedPath(to);
   const match = useMatch({ path: resolved.pathname, end: true });
+  debugger;
   return <Link to={to} {...rest} style={{ color: match ? "red" : "black" }} />;
 }
 

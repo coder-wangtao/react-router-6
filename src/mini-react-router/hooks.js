@@ -12,7 +12,6 @@ export function useRoutes(routes) {
   // 对于 children 里面的 path 需要变成完整的路径，并且需要将 routes 扁平化，
   // 不在使用嵌套结构
   const matches = matchRoutes(routes, { pathname });
-  console.log(matches);
   return renderMatches(matches);
 }
 
@@ -20,7 +19,6 @@ function renderMatches(matches) {
   if (matches === null) {
     return null;
   }
-
   // reduceRight 方法, 从右往左累加
   //matches 采用从右往左的遍历顺序，将上一项的返回值作为后一项的 outlet，那么子路由就作为 outlet 传递给了父路由
   return matches.reduceRight((outlet, match) => {
@@ -53,28 +51,30 @@ export function useNavigate() {
   return navigate;
 }
 
+//ok
 export function useLocation() {
   const { location } = useContext(NavigationContext);
   return location;
 }
 
 //children
+//ok
 export function useOutlet() {
   let { outlet } = useContext(RouteContext);
   return outlet;
 }
-
+//ok
 export function useParams() {
   const { matches } = useContext(RouteContext);
   const routeMatch = matches[matches.length - 1];
   return routeMatch ? routeMatch.params : {};
 }
-
+//ok
 export function useMatch(pattern) {
   const { pathname } = useLocation();
   return useMemo(() => matchPath(pattern, pathname), [pattern, pathname]);
 }
-
+//ok
 export function useResolvedPath(to) {
   const { pathname } = useLocation();
   return useMemo(
