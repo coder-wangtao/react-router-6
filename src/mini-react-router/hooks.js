@@ -19,6 +19,8 @@ function renderMatches(matches) {
   if (matches === null) {
     return null;
   }
+  debugger;
+
   // reduceRight 方法, 从右往左累加
   //matches 采用从右往左的遍历顺序，将上一项的返回值作为后一项的 outlet，那么子路由就作为 outlet 传递给了父路由
   return matches.reduceRight((outlet, match) => {

@@ -17,6 +17,11 @@
       <li><a onclick="go(-1)">go(-1)</a></li>
     </ul>
     <script>
+      //这段代码封装了history.pushState方法，替换了默认的pushState方法，使得每次调用pushState时，都会手动触发onpopstate事件。
+      //pushState方法用来修改浏览器历史记录，而不进行页面刷新。
+
+      // history.pushState 是 HTML5 中 History API 提供的一个方法，用于在不刷新页面的情况下修改浏览器的历史记录。
+      // 它允许你添加一个新的历史记录条目，这样当用户点击浏览器的“后退”或“前进”按钮时，可以在页面之间切换。
       (function (history) {
         let oldPushState = history.pushState;
         history.pushState = function () {
